@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Статус страница accounting.skyeng.ru</title>
+    <style>
+        table tbody td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<iframe src="https://rpm.newrelic.com/public/charts/lcPYwlgtCDw" width="500" height="300" scrolling="no"
+        frameborder="no"></iframe>
+<br/>
+<iframe src="https://rpm.newrelic.com/public/charts/4hSrG45QoDo" width="500" height="300" scrolling="no"
+        frameborder="no"></iframe>
+<table border="1" cellpadding="1" cellspacing="1">
+    <thead>
+    <tr>
+        <th>Платежная система</th>
+        <th>Время последней успешной транзакции</th>
+    </tr>
+    </thead>
+    <tbody id="transactionsBody">
+    </tbody>
+
+    <script>
+        var transactionsBody = '';
+        $.ajax({
+            dataType: "json",
+            url: 'https://accounting.test-y50.skyeng.link/api/frontend/v1/userPayment/getLastTransactionsDateTime',
+            success: function (response) {
+                $.each(response.data, function (key, value) {
+                    transactionsBody += '<tr>';
+                    transactionsBody += '<td>' + key + '</td>';
+                    if (null === value) {
+                        value = 'Неопределено';
+                    }
+                    transactionsBody += '<td>' + value + '</td>';
+                    transactionsBody += '</tr>';
+                });
+                $('#transactionsBody').html(transactionsBody);
+            }
+        });
+    </script>
+</table>
+</body>
+</html>

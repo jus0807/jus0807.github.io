@@ -33,7 +33,7 @@
         var transactionsBody = '';
         $.ajax({
             dataType: "json",
-            url: 'https://accounting.test-y50.skyeng.link/api/frontend/v1/userPayment/getLastTransactionsDateTime',
+            url: 'https://accounting.skyeng.ru/api/frontend/v1/userPayment/getLastTransactionsDateTime',
             success: function (response) {
                 $.each(response.data, function (key, value) {
                     transactionsBody += '<tr>';
